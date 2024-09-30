@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "github.com/eclipsemode/common/sso";
+
+service Auth {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  optional string name = 3;
+  optional string phone = 4;
+  optional string country = 5;
+  optional string city = 6;
+  optional string address = 7;
+}
+message RegisterResponse {
+  string id = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+message LoginResponse {
+  string refresh_token = 1;
+  string access_token = 2;
+}
+
+message IsAdminRequest {
+  string access_token = 1;
+}
+message IsAdminResponse {
+  bool is_admin = 1;
+}
